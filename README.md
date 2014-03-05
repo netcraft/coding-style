@@ -11,3 +11,7 @@ Open the relevant files to see the code (HAML / SCSS / JS).
 NOTE: the code won't run locally, you should see the Codepen for the example to work.
 
 You're welcome to comment on the files / open Issues / create Pull Requests.
+
+TODO
+- Create a full working environment
+- Sync the repository with Codepen through Gist/Post commit hooks
