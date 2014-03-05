@@ -305,7 +305,7 @@
 					var answer = args[i];
 					var winnerIndex = fooAnswers.indexOf(answer);
 					logger.print("Answer " + (answer/42) + " is at position " + (winnerIndex+1));
-					$(".foo:eq(" + winnerIndex + ")").addClass(gameSettings.classNames.selected);
+					$("." + gameSettings.classNames.foo + ":eq(" + winnerIndex + ")").addClass(gameSettings.classNames.selected);
 
 				}
 
