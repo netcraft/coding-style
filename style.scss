@@ -1,0 +1,257 @@
+// --------------------------------------------------
+// Netcraft Style Guide
+// --------------------------------------------------
+
+// Netcraft basic colors
+// https://kuler.adobe.com/Netcraft-Basic-color-theme-3457730/
+$nc-color-basic-black: #1F242A;
+$nc-color-basic-white: #FFFFFF;
+$nc-color-basic-red: #E91A1A;
+$nc-color-basic-gray: #595959;
+$nc-color-basic-gray-light: #D9D9D9;
+
+// Netcraft colorful pallete
+// https://kuler.adobe.com/Netcraft-Colourful-color-theme-3457782/
+$nc-color-colors-red: #ED4848;
+$nc-color-colors-green: #33C073;
+$nc-color-colors-blue: #338DCD;
+$nc-color-colors-yellow: #FFCD33;
+$nc-color-colors-gray: #E1E1E3;
+
+// Site colors
+// https://kuler.adobe.com/Netcraft-Site-color-theme-3587401/
+$nc-color-site-black: #1C1B1B; // Site header
+$nc-color-site-dark: #2D2E2F; // Body background (dark)
+$nc-color-site-red: #ED2C3A; // Highlight
+$nc-color-site-red-light: #ff4a56; // Hover
+$nc-color-site-text-dark-bg: #9c9c9c; // Body text (dark bg)
+$nc-color-site-text-light-bg: #616060; // Body text (light bg)
+$nc-color-site-text-header-dark-bg: #fff; // Header text (light bg)
+$nc-color-site-text-header-light-bg: #404040; // Header text (light bg)
+
+// TODO Create themes
+
+// Base variables
+// TODO Use Compass Vertical Rhythm module
+$browser-default-font-size: 16px;
+$nc-base-font-size: 18px;
+$nc-base-line-height: 1.5rem;
+
+// Base mixins, functions
+@function context ($target, $context) {
+	@return ($target / $context);
+}
+
+@function rem ($size, $context: $nc-base-font-size) {
+	@return context($size, $context) + rem;
+}
+
+// Netcraft font
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+// Typography
+html {
+	font-family: 'Open Sans', sans-serif;
+	font-size: rem($nc-base-font-size, $browser-default-font-size);
+
+	::selection {
+		color: $nc-color-basic-white;
+		background-color: $nc-color-site-red;
+	}
+
+	::-moz-selection {
+		color: $nc-color-basic-white;
+		background-color: $nc-color-site-red;
+	}
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: normal;
+	text-transform: uppercase;
+	font-size: rem(50px);
+}
+
+// TODO Use a grid system
+
+// Animation
+%nc-transition {
+	@include transition-duration(.2s);
+	@include transition-timing-function(ease);
+}
+
+%nc-transition-fade {
+	@extend %nc-transition;
+	@include transition-property(opacity);
+}
+
+%nc-transition-background {
+	@extend %nc-transition;
+	@include transition-property(background-color);
+}
+
+// Base elements
+%nc-button {
+	@extend %nc-transition-background;
+	background-color: $nc-color-site-red;
+	color: $nc-color-basic-white;
+	padding: 10px 30px;
+	outline: none;
+
+	&:hover, &:focus {
+		background-color: $nc-color-site-red-light;
+	}
+}
+
+button%nc-button {
+	border: none;
+}
+
+a%nc-button {
+	text-decoration: none;
+}
+
+// --------------------------------------------------
+// Libs, other mixins
+// --------------------------------------------------
+
+// http://codepen.io/HugoGiraudel/pen/KFDuB
+@mixin scrollbar($size, $primary, $secondary: lighten($primary, 25%)) {
+	::-webkit-scrollbar {
+		width:  $size;
+		height: $size;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: $primary;
+	}
+
+	::-webkit-scrollbar-track {
+		background: $secondary;
+	}
+
+	// For Internet Explorer
+	body {
+		scrollbar-face-color: $primary;
+		scrollbar-track-color: $secondary;
+	}
+}
+
+// --------------------------------------------------
+// Example code
+// --------------------------------------------------
+
+// Base variables
+$base-horizontal-space: 5px;
+$circle-size: rem(90px);
+$circle-padding: rem(50px);
+
+html {
+	@include scrollbar(0, $nc-color-site-dark);
+	overflow: scroll;
+}
+
+body {
+	padding: 0 $base-horizontal-space * 2;
+	counter-reset: foo;
+	background-color: $nc-color-site-dark;
+	color: $nc-color-site-text-dark-bg;
+}
+
+h1, h2 {
+	color: $nc-color-site-text-header-dark-bg;
+}
+
+button {
+	@extend %nc-button;
+}
+
+%circle {
+	@include border-radius(50%);
+	@include box-shadow(5px 5px 0px 0px $nc-color-colors-yellow);
+	text-align: center;
+	padding: $circle-padding;
+	width: $circle-size;
+	height: $circle-size;
+}
+
+.log {
+	$offset: $base-horizontal-space * 0;
+
+	@include scrollbar(1px, $nc-color-site-dark);
+	position: fixed;
+	top: $offset;
+	right: $offset;
+	width: 300px;
+	background-color: rgba($nc-color-site-black, 0.5);
+
+	h2, output {
+		padding: 10px;
+	}
+
+	h2 {
+		@extend %nc-transition-background;
+		background-color: transparent;
+		font-size: rem(32px);
+		margin: 0;
+		cursor: pointer;
+
+		&:hover {
+			background-color: rgba($nc-color-site-black, 1);
+		}
+	}
+
+	output {
+		font-family: Consolas, monaco, monospace;
+		font-size: rem(14px);
+		color: $nc-color-basic-white;
+		display: block;
+		height: 400px;
+		overflow: auto;
+	}
+
+	.event {
+		color: $nc-color-colors-yellow;
+	}
+}
+
+.foo {
+	@extend %circle;
+	@include inline-block();
+	background-color: $nc-color-site-red;
+	color: white;
+	margin: 15px;
+	position: relative;
+	font-size: rem(16px);
+	cursor: pointer;
+
+	&:before {
+		@extend %circle;
+		@extend %nc-transition-fade;
+		@include opacity(1);
+		position: absolute;
+		top: 0;
+		left: 0;
+		color: $nc-color-site-text-light-bg;
+		background-color: $nc-color-colors-gray;
+		counter-increment: foo;
+		content: "Foo #" counter(foo);
+	}
+
+	&:hover {
+		&:before {
+			@include opacity(0);
+		}
+	}
+
+	&.selected {
+		&:before {
+			color: $nc-color-basic-white;
+			background-color: $nc-color-colors-green;
+		}
+	}
+}
