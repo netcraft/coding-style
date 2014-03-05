@@ -7,7 +7,7 @@
 	 * Instances of Printer can output to the screen,
 	 * with each instance initialized with a different container
 	 * and a default class name for every printed line.
-   	 * TODO Define JSDoc for IIFEs
+   * TODO Define JSDoc for IIFEs
 	 */
 	var Printer = (function (Printer) {
 
