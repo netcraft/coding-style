@@ -32,6 +32,7 @@
 		 * @param {Object} settings - Printer settings
 		 */
 		Printer.prototype.init = function (settings) {
+			
 			// Use this pattern to extend default settings
 			$.extend(true, printerSettings, settings);
 
