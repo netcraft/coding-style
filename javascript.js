@@ -2,6 +2,7 @@
 // This IIFE simulates JS files that our module is dependent on.
 (function (global, $, undefined) {
 
+	//just a comment
 	/**
 	 * Printer "class".
 	 * Instances of Printer can output to the screen,
