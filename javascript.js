@@ -291,7 +291,7 @@
 				// (not possible with JSHint)
 				if (args.length === 0) {
 					return;
-				};
+				}
 
 				// Use Array.map to quickly iterate arrays
 				// (see also Array.forEach)
